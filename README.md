@@ -33,7 +33,7 @@ A web application to classify news articles as fake or real. The app uses a Reac
 ### Backend Setup
 1. Clone the repository and navigate to the backend folder:
    ```bash
-   git clone <repository_url>
+   git clone https://github.com/mo-abdulai/fake-news-detector.git
    cd backend
    ```
 2. Create and activate a virtual environment:
