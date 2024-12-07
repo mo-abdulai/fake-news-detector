@@ -1,0 +1,31 @@
+# General
+.DS_Store
+Thumbs.db
+*.log
+
+# Backend (Python Flask)
+backend/__pycache__/
+backend/*.pyc
+backend/env/
+backend/.env
+backend/instance/
+backend/.pytest_cache/
+backend/.mypy_cache/
+backend/.coverage
+backend/venv/
+backend/logs/
+backend/*.db
+backend/*.sqlite3
+
+# Frontend (React)
+frontend/node_modules/
+frontend/.env
+frontend/build/
+frontend/dist/
+frontend/.next/
+frontend/logs/
+
+# Ignore IDE/Editor settings
+.vscode/
+.idea/
+*.swp
