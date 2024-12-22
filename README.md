@@ -102,7 +102,7 @@ project-directory/
 
 ## Screenshots
 ### Home Page
-![Home Page](https://via.placeholder.com/800x400.png?text=Screenshot+Placeholder)
+![Home Page](https://ibb.co/xD2rJRj)
 
 ---
 

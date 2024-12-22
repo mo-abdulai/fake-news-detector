@@ -6,6 +6,7 @@ from bs4 import BeautifulSoup
 import requests
 from dotenv import load_dotenv
 import os
+import requests
 
 
 load_dotenv()
@@ -14,7 +15,7 @@ app = Flask(__name__)
 CORS(app)
 
 
-openai.api_key = os.getenv("OPENAI_API_KEY")
+# openai.api_key = os.getenv("OPENAI_API_KEY")
 
 def extract_content(url):
     
@@ -31,7 +32,6 @@ def extract_content(url):
 
 @app.route('/classify', methods=['POST'])
 def classify_news():
-    
     try:
         data = request.json
         url = data.get('url')
@@ -41,30 +41,32 @@ def classify_news():
             return jsonify({"error": "URL is required"}), 400
 
         text = extract_content(url)
-        # max_tokens = 3000  
-        # text = text[:max_tokens]
 
         prompt = f"Determine if the following news content is fake or real:\n\n{text}\n\nRespond with 'Fake' or 'Real'."
-    
-        response = openai.chat.completions.create(
-            model="gpt-4o-mini",  # Use the appropriate model
-            messages=[
-                {
-                    "role": "system", 
-                    "content": "You are a helpful assistant that detects fake news."
-                },
-                {
-                    "role": "user", 
-                    "content": prompt
-                    }
-            ]
-        )
-        
-        result = response['choices'][0]['message']['content']
-        print(result)
+
+        # Replace with Google Gemini API request
+        api_url = "https://gemini.googleapis.com/v1/text/generate"
+        headers = {
+            "Authorization": f"Bearer YOUR_ACCESS_TOKEN",
+            "Content-Type": "application/json",
+        }
+        payload = {
+            "model": "gemini-v1",
+            "prompt": prompt,
+            "temperature": 0.7,
+            "max_tokens": 300,
+        }
+
+        response = requests.post(api_url, headers=headers, json=payload)
+
+        if response.status_code != 200:
+            return jsonify({"error": f"Google Gemini API error: {response.text}"}), response.status_code
+
+        result = response.json().get("text", "Error processing response")
         return jsonify({"result": result})
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+
 
 
 if __name__ == '__main__':  
