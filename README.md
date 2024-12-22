@@ -102,7 +102,7 @@ project-directory/
 
 ## Screenshots
 ### Home Page
-![Home Page](https://ibb.co/xD2rJRj)
+![Home Page]()
 
 ---
 
